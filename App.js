@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Text, StyleSheet, View, FlatList} from 'react-native';
-
+import Cita from './src/components/Cita';
 const App = () => {
   // Definir el state de citas
 
@@ -15,11 +15,7 @@ const App = () => {
       <FlatList
         data={citas}
         keyExtractor={(cita) => cita.id}
-        renderItem={({item}) => (
-          <View>
-            <Text>{item.paciente}</Text>
-          </View>
-        )}
+        renderItem={({item}) => <Cita cita={item} />}
       />
       {/* {citas.map((cita) => (
         <View key={cita.id}>
