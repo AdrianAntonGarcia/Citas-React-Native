@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: 'bold',
     fontSize: 18,
-    marginTop: 20,
+    marginTop: 10,
   },
   texto: {
     fontSize: 14,

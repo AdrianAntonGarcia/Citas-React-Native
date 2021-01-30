@@ -151,7 +151,7 @@ const Formulario = () => {
         <View>
           <TouchableHighlight
             onPress={() => crearNuevaCita()}
-            style={styles.btnEliminar}>
+            style={styles.btnSubmit}>
             <Text style={styles.textoSubmit}> Crear nueva cita</Text>
           </TouchableHighlight>
         </View>
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: 'bold',
     fontSize: 18,
-    marginTop: 20,
+    marginTop: 10,
   },
   input: {
     marginTop: 10,
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderStyle: 'solid',
   },
-  btnEliminar: {
+  btnSubmit: {
     padding: 10,
     backgroundColor: '#AA076B',
     marginVertical: 10,

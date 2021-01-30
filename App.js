@@ -1,9 +1,17 @@
 import React, {useState} from 'react';
-import {Text, StyleSheet, View, FlatList} from 'react-native';
+import {
+  Text,
+  StyleSheet,
+  View,
+  FlatList,
+  TouchableHighlight,
+  Platform,
+} from 'react-native';
 import Cita from './src/components/Cita';
 import Formulario from './src/components/Formulario';
 
 const App = () => {
+  const [mostrarForm, guardarMostrarForm] = useState(false);
   // Definir el state de citas
 
   const [citas, setCitas] = useState([
@@ -19,31 +27,55 @@ const App = () => {
     });
   };
 
+  // Muestra u oculta el formulario
+
+  const mostrarFormulario = () => {
+    guardarMostrarForm(!mostrarForm);
+  };
   return (
     <View style={styles.contenedor}>
       <Text style={styles.titulo}>Administrador de Citas</Text>
+
       <View style={styles.contenido}>
-        <Formulario />
-        <Text style={styles.titulo}>
-          {citas.length > 0
-            ? 'Administra tus citas'
-            : 'No hay citas, agrega una'}
-        </Text>
-        {/* Mejor opción para listar elementos en performance, solo carga los que
-      se visualizan en pantalla  */}
-        <FlatList
-          style={styles.listado}
-          data={citas}
-          keyExtractor={(cita) => cita.id}
-          renderItem={({item}) => (
-            <Cita eliminarPaciente={eliminarPaciente} cita={item} />
-          )}
-        />
-        {/* {citas.map((cita) => (
-        <View key={cita.id}>
-          <Text>{cita.paciente}</Text>
-        </View>
-      ))} */}
+        {mostrarForm ? (
+          <>
+            <TouchableHighlight
+              onPress={() => mostrarFormulario()}
+              style={styles.btnMostrarForm}>
+              <Text style={styles.textoMostrarForm}> Mostrar Citas</Text>
+            </TouchableHighlight>
+            <Text style={styles.titulo}>Crea una nueva cita</Text>
+            <Formulario />
+          </>
+        ) : (
+          <>
+            <TouchableHighlight
+              onPress={() => mostrarFormulario()}
+              style={styles.btnMostrarForm}>
+              <Text style={styles.textoMostrarForm}> Crear nueva cita</Text>
+            </TouchableHighlight>
+            <Text style={styles.titulo}>
+              {citas.length > 0
+                ? 'Administra tus citas'
+                : 'No hay citas, agrega una'}
+            </Text>
+            {/* Mejor opción para listar elementos en performance, solo carga los
+            que se visualizan en pantalla */}
+            <FlatList
+              style={styles.listado}
+              data={citas}
+              keyExtractor={(cita) => cita.id}
+              renderItem={({item}) => (
+                <Cita eliminarPaciente={eliminarPaciente} cita={item} />
+              )}
+            />
+            {/* {citas.map((cita) => (
+              <View key={cita.id}>
+                <Text>{cita.paciente}</Text>
+              </View>
+            ))} */}
+          </>
+        )}
       </View>
     </View>
   );
@@ -64,9 +96,20 @@ const styles = StyleSheet.create({
   },
   titulo: {
     color: '#FFF',
-    marginTop: 20,
-    marginBottom: 20,
+    marginTop: Platform.OS === 'ios' ? 40 : 10,
+    marginBottom: 10,
     fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  btnMostrarForm: {
+    padding: 10,
+    backgroundColor: '#AA076B',
+    marginVertical: 10,
+  },
+  textoMostrarForm: {
+    color: '#FFF',
+    fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'center',
   },
