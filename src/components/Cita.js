@@ -25,6 +25,7 @@ const Cita = ({cita, eliminarPaciente}) => {
           style={styles.btnElminar}>
           <Text style={styles.textoEliminar}> Eliminar &times;</Text>
         </TouchableHighlight>
+        {/* TODO: HACER ALGO */}
       </View>
     </View>
   );
