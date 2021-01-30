@@ -3,6 +3,8 @@ import {Text, StyleSheet, View, TextInput, Button} from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const Formulario = () => {
+  const [fecha, guardarFecha] = useState('');
+  const [hora, guardarHora] = useState('');
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isTimePickerVisible, setTimePickerVisibility] = useState(false);
 
@@ -17,7 +19,8 @@ const Formulario = () => {
   };
 
   const confirmarFecha = (date) => {
-    console.warn('A date has been picked: ', date);
+    const opciones = {year: 'numeric', month: 'long', day: '2-digit'};
+    guardarFecha(date.toLocaleDateString('es-ES', opciones));
     hideDatePicker();
   };
 
@@ -31,8 +34,9 @@ const Formulario = () => {
     setTimePickerVisibility(false);
   };
 
-  const confirmarHora = (date) => {
-    console.warn('A date has been picked: ', date);
+  const confirmarHora = (horaSel) => {
+    const opciones = {hour: 'numeric', minute: '2-digit'};
+    guardarHora(horaSel.toLocaleString('es-ES', opciones));
     hideTimePicker();
   };
   return (
@@ -63,6 +67,7 @@ const Formulario = () => {
           />
         </View>
         <View>
+          <Text style={styles.label}>Fecha:</Text>
           <Button title="Seleccionar Fecha" onPress={showDatePicker} />
           <DateTimePickerModal
             isVisible={isDatePickerVisible}
@@ -74,8 +79,10 @@ const Formulario = () => {
             cancelTextIOS="Cancelar"
             confirmTextIOS="Confirmar"
           />
+          <Text>{fecha}</Text>
         </View>
         <View>
+          <Text style={styles.label}>Hora:</Text>
           <Button title="Seleccionar Hora" onPress={showTimePicker} />
           <DateTimePickerModal
             isVisible={isTimePickerVisible}
@@ -88,6 +95,7 @@ const Formulario = () => {
             confirmTextIOS="Confirmar"
             is24Hour
           />
+          <Text>{hora}</Text>
         </View>
         <View>
           <Text style={styles.label}>Síntomas:</Text>
