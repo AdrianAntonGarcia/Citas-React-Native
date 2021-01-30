@@ -32,7 +32,6 @@ const Cita = ({cita, eliminarPaciente}) => {
 
 const styles = StyleSheet.create({
   cita: {
-    marginHorizontal: '2.5%',
     backgroundColor: '#FFF',
     borderBottomColor: '#e1e1e1',
     borderStyle: 'solid',

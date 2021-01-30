@@ -22,24 +22,29 @@ const App = () => {
   return (
     <View style={styles.contenedor}>
       <Text style={styles.titulo}>Administrador de Citas</Text>
-      <Formulario />
-      <Text style={styles.titulo}>
-        {citas.length > 0 ? 'Administra tus citas' : 'No hay citas, agrega una'}
-      </Text>
-      {/* Mejor opción para listar elementos en performance, solo carga los que
+      <View style={styles.contenido}>
+        <Formulario />
+        <Text style={styles.titulo}>
+          {citas.length > 0
+            ? 'Administra tus citas'
+            : 'No hay citas, agrega una'}
+        </Text>
+        {/* Mejor opción para listar elementos en performance, solo carga los que
       se visualizan en pantalla  */}
-      <FlatList
-        data={citas}
-        keyExtractor={(cita) => cita.id}
-        renderItem={({item}) => (
-          <Cita eliminarPaciente={eliminarPaciente} cita={item} />
-        )}
-      />
-      {/* {citas.map((cita) => (
+        <FlatList
+          style={styles.listado}
+          data={citas}
+          keyExtractor={(cita) => cita.id}
+          renderItem={({item}) => (
+            <Cita eliminarPaciente={eliminarPaciente} cita={item} />
+          )}
+        />
+        {/* {citas.map((cita) => (
         <View key={cita.id}>
           <Text>{cita.paciente}</Text>
         </View>
       ))} */}
+      </View>
     </View>
   );
 };
@@ -48,6 +53,13 @@ const styles = StyleSheet.create({
   // Flex crece a lo largo de todo el espacio que tenga disponible, es como 100% height
   contenedor: {
     backgroundColor: '#AA076B',
+    flex: 1,
+  },
+  contenido: {
+    flex: 1,
+    marginHorizontal: '2.5%',
+  },
+  listado: {
     flex: 1,
   },
   titulo: {

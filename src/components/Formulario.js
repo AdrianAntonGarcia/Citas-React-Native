@@ -82,8 +82,8 @@ const Formulario = () => {
     );
   };
   return (
-    <ScrollView>
-      <View style={styles.formulario}>
+    <>
+      <ScrollView style={styles.formulario}>
         <View>
           <Text style={styles.label}>Paciente:</Text>
           <TextInput
@@ -155,8 +155,8 @@ const Formulario = () => {
             <Text style={styles.textoSubmit}> Crear nueva cita</Text>
           </TouchableHighlight>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </>
   );
 };
 
@@ -165,7 +165,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFF',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    marginHorizontal: '2.5%',
   },
   label: {
     fontWeight: 'bold',
