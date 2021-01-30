@@ -9,13 +9,28 @@ const App = () => {
     {id: '2', paciente: 'Redux', propietario: 'Itzel', sintomas: 'No duerme'},
     {id: '3', paciente: 'Native', propietario: 'Josue', sintomas: 'No canta'},
   ]);
+
+  // Elimina los pacientes del state
+  const eliminarPaciente = (id) => {
+    setCitas((citasActuales) => {
+      return citasActuales.filter((cita) => cita.id !== id);
+    });
+  };
+
   return (
     <View style={styles.contenedor}>
       <Text style={styles.titulo}>Administrador de Citas</Text>
+      <Text style={styles.titulo}>
+        {citas.length > 0 ? 'Administra tus citas' : 'No hay citas, agrega una'}
+      </Text>
+      {/* Mejor opción para listar elementos en performance, solo carga los que
+      se visualizan en pantalla  */}
       <FlatList
         data={citas}
         keyExtractor={(cita) => cita.id}
-        renderItem={({item}) => <Cita cita={item} />}
+        renderItem={({item}) => (
+          <Cita eliminarPaciente={eliminarPaciente} cita={item} />
+        )}
       />
       {/* {citas.map((cita) => (
         <View key={cita.id}>
@@ -34,7 +49,8 @@ const styles = StyleSheet.create({
   },
   titulo: {
     color: '#FFF',
-    marginTop: 10,
+    marginTop: 20,
+    marginBottom: 20,
     fontSize: 24,
     fontWeight: 'bold',
     textAlign: 'center',
