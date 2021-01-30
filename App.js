@@ -1,11 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Text, StyleSheet, View} from 'react-native';
 
 const App = () => {
-  console.log('Desde consolaaaa');
+  // Definir el state de citas
+
+  const [citas, setCitas] = useState([
+    {id: '1', paciente: 'Hook', propietario: 'Adrián', sintomas: 'No come'},
+    {id: '2', paciente: 'Redux', propietario: 'Itzel', sintomas: 'No duerme'},
+    {id: '3', paciente: 'Native', propietario: 'Josue', sintomas: 'No canta'},
+  ]);
   return (
     <View style={styles.contenedor}>
       <Text style={styles.titulo}>Administrador de Citas</Text>
+      {citas.map((cita) => (
+        <View key={cita.id}>
+          <Text>{cita.paciente}</Text>
+        </View>
+      ))}
     </View>
   );
 };
