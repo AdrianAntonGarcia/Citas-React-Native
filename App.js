@@ -45,7 +45,11 @@ const App = () => {
               <Text style={styles.textoMostrarForm}> Mostrar Citas</Text>
             </TouchableHighlight>
             <Text style={styles.titulo}>Crea una nueva cita</Text>
-            <Formulario />
+            <Formulario
+              citas={citas}
+              setCitas={setCitas}
+              guardarMostrarForm={guardarMostrarForm}
+            />
           </>
         ) : (
           <>
